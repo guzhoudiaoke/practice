@@ -1,21 +1,26 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
+
+const LONG_WORD_LEN int = 10
 
 func main() {
         var n uint32
-        var length int
-        var str string
         fmt.Scanf("%d", &n)
 
         for n != 0 {
-                fmt.Scanf("%s", &str)
-                length = len(str)
-                if (length < 10) {
-                        fmt.Println(str)
+		var str string
+		fmt.Scan(&str)
+
+		length := len(str)
+                if (length <= LONG_WORD_LEN) {
+                        fmt.Printf("%s\n", str)
                 } else {
                         fmt.Printf("%c%d%c\n", str[0], length - 2, str[length-1])
                 }
+
                 n--
         }
 }
