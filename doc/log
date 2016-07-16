@@ -1,5 +1,13 @@
-1.
-str.find('aaa') >= 0
+1. strstr()
+py
+s.find('aaa') >= 0
 
-2. 
+go
 strings.Contains(str, "aaa")
+
+2. tolower()
+py
+s = s.lower()
+
+go
+strings.ToLower(s)
