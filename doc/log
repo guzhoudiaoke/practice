@@ -1,0 +1,5 @@
+1.
+str.find('aaa') >= 0
+
+2. 
+strings.Contains(str, "aaa")
