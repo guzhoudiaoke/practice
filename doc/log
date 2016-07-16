@@ -18,3 +18,5 @@ s.erase(s.length() - 1);
 
 py
 s = s[:-1]
+
+
