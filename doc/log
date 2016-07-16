@@ -11,3 +11,10 @@ s = s.lower()
 
 go
 strings.ToLower(s)
+
+3. std::string
+s[s.length() - 1] = '\0';  (x)
+s.erase(s.length() - 1);
+
+py
+s = s[:-1]
