@@ -1,0 +1,117 @@
+id      problem     language        rank    date
+1       1A          cpp,py,go
+2       4A          c,py,go
+3       71A         c,py,go
+4       158A        c,py,go
+5       118A        c,py,go
+6       50A         cpp,py,go
+7       231A        cpp,py,go
+8       282A        cpp,py,go
+9       158B        cpp,py,go
+10      96A         cpp,py,go
+11      112A        cpp,py,go
+12      339A        cpp,py,go
+13      116A        cpp,py,go
+14      131A        cpp,py,go
+15      266A        cpp,py,go
+16      133A        cpp,py,go
+17      160A        cpp,py,go
+18      281A        cpp,py,go
+19      122A        cpp,py,go
+20      58A         cpp,py,go
+21      236A        cpp,py,go
+22      467A        cpp,py,go
+23      263A        cpp,py,go
+24      148A        cpp,py,go
+25      546A        cpp,py,go
+26      110A        cpp,py,go
+27      136A        cpp,py,go
+28      266B        cpp,py,go
+29      271A        cpp,py,go
+30      82A         cpp,py,go
+31      337A        cpp,py,go
+32      41A         cpp,py,go
+33      472A        cpp,py,go       31913
+34      451A        cpp,py,go
+35      580A        cpp,py,go
+36      119A        cpp,py,go
+37      479A        py,go
+38      69A         py,go
+39      486A        py,go
+40      379A        py,go
+41      460A        py,go
+42      208A        py,go
+43      144A        py,go           26911   16-7-18
+44      469A        py                      16-7-19
+45      344A        go                                  a lot data, fmt.Scan TLE, bufio.NewScanner work, pre scanf("%d\n", &n)
+46      268A        py
+47      500A        go
+48      318A        py
+49      443A        go
+50      510A        py
+51      228A        go
+52      61A         py
+53      617A        go
+54      492A        py
+55      466A        go
+56      520A        py
+57      25A         go              21810   16-7-19
+58      478A        py
+59      141A        go
+60      405A        py
+61      584A        go
+62      581A        py
+63      230A        go
+64      540A        py
+65      339B        go                                  int over flow, use uint64
+66      313A        py
+67      455A        go
+68      59A         py
+69      448A        go
+70      509A        py              18692   16-7-19
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
