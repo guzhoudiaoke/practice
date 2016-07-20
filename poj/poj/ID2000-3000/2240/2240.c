@@ -1,0 +1,81 @@
+/*
+ * poj 2240
+ * guzhoudiaoke@126.com
+ * 2011-09-17
+ */
+
+#include <stdio.h>
+
+char currencies[31][31];
+float rate[31][31], dist[31][31];
+int n;
+
+int get_no(char str[31])
+{
+	int i;
+	for (i = 1; i <= n; i++)
+		if (strcmp(str, currencies[i]) == 0)
+			return i;
+}
+
+void shortest_path_floyd()
+{
+	int i, u, v, w;
+	for (v = 1; v <= n; v++)
+		for (w = 1; w <= n; w++)
+			dist[v][w] = rate[v][w];
+	
+	for (u = 1; u <= n; u++)
+		for (v = 1; v <= n; v++)
+			for (w = 1; w <= n; w++)
+				if (dist[v][u] * dist[u][w] > dist[v][w])
+					dist[v][w] = dist[v][u] * dist[u][w];
+}
+
+int get_result()
+{
+	int i, j;
+	
+	for (i = 1; i <=n; i++)
+		for (j = i; j <= n; j++)
+			if (dist[j][i] * dist[i][j] > 1.0)
+				return 1;
+	
+	return 0;
+}
+
+int main()
+{
+	int m, i, j, t;
+	char from[31], to[31];
+	float r;
+
+	t = 0;
+	while (1)
+	{
+		scanf("%d", &n);
+		if (n == 0)
+			break;
+		for (i = 1; i <= n; i++)
+			scanf("%s", currencies[i]);
+		
+		for (i = 1; i <= n; i++)
+			for (j = 1; j <= n; j++)
+				rate[i][j] = 0;
+		scanf("%d", &m);
+		for (i = 0; i < m; i++)
+		{
+			scanf("%s%f%s", from, &r, to);
+			rate[get_no(from)][get_no(to)] = r;
+		}
+
+		t++;
+		shortest_path_floyd();
+		if (get_result())
+			printf("Case %d: Yes\n", t);
+		else
+			printf("Case %d: No\n", t);
+	}
+
+	return 0;
+}

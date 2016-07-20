@@ -1,0 +1,11 @@
+Sample Input
+
+2
+1.0 1.0
+25.0 0.0
+
+Sample Output
+
+Property 1: This property will begin eroding in year 1.
+Property 2: This property will begin eroding in year 20.
+END OF OUTPUT.

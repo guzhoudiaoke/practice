@@ -1,0 +1,131 @@
+/*
+ * poj 2676
+ * guzhoudiaoke@126.com
+ * 2011-09-11
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char map[9][10];
+//char can_place[10];
+
+typedef struct cell_node{
+	int row;
+	int col;
+	int freedom;
+	int may_place[10];
+} cell_node;
+
+cell_node cells[81];
+
+int get_freedom(int r, int c, int place[10])
+{
+	int i, j;
+	for (i = 0; i < 10; i++)
+		place[i] = 1;
+	for (i = 0; i < 9; i++)
+		place[map[r][i]-'0'] = 0;
+	for (i = 0; i < 9; i++)
+		place[map[i][c]-'0'] = 0;
+	c /= 3; c *= 3;
+	r /= 3; r *= 3;
+	for (i = r; i < r+3; i++)
+		for (j = c; j < c+3; j++)
+			place[map[i][j]-'0'] = 0;
+	j = 0;
+	for (i = 1; i < 10; i++)
+		if (place[i])
+			j++;
+	return j;
+}
+
+int cmp_cell(const void *a, const void *b)
+{
+	return ((cell_node *)a)->freedom - ((cell_node *)b)->freedom;
+}
+
+void fill_freedom_1()
+{
+	int i = 0;
+	while (cells[i].freedom == 1)
+	{
+		int r = cells[i].row;
+		int c = cells[i].col;
+		int j;
+		for (j = 1; j <= 9; j++)
+			if (cells[i].may_place[j] == 1)
+				break;
+		printf("r = %d, c = %d, j = %d\n", r, c, j);
+		map[r][c] = j + '0';
+
+		i++;
+	}
+}
+
+void dfs(int start, int to)
+{
+	int i, j;
+	if (start < to)
+		return;
+	
+	for (i = start; i <= to; i++)
+	{
+		for (j = 1; j <= 9; j++)
+			if (cells[i].may_place[j])
+			{
+				int r = cells[i].row;
+				int c = cells[i].col;
+				map[r][c] = j + '0';
+				dfs(start+1, to);
+			}
+	}	
+}
+
+int main()
+{
+	int n, i, j;
+	scanf("%d", &n);
+
+	while (n--)
+	{
+		for (i = 0; i < 9; i++)
+			scanf("%s", map[i]);
+		
+		int cells_size;
+		while (1)
+		{
+			memset(cells, 0, sizeof(cells));
+			int k = 0;
+			for (i = 0; i < 9; i++)
+				for (j = 0; j < 9; j++)
+				{
+					if (map[i][j] == '0')
+					{
+						cells[k].row = i;
+						cells[k].col = j;
+						cells[k].freedom = get_freedom(i, j, cells[k].may_place);
+						k++;
+					}
+				}
+				
+			qsort(cells, k, sizeof(cell_node), cmp_cell);	
+			if (cells[0].freedom != 1)
+				break;
+			fill_freedom_1();
+			cells_size = k - 1;
+		}
+
+		dfs(0, cells_size);
+	
+		for (i = 0; i < 9; i++)
+		{
+			for (j = 0; j < 9; j++)
+				printf("%c", map[i][j]);
+			printf("\n");
+		}
+	}
+
+	return 0;
+}

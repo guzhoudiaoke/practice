@@ -1,0 +1,64 @@
+/*
+ * poj 1836
+ * guzhoudiaoke@126.com
+ * 2011-09-13
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int dp_pre[1001], dp_post[1001];
+float height[1001];
+int n;
+
+int solve()
+{
+	int i, j, max;
+	
+	dp_pre[0] = 1;
+	for (i = 1; i < n; i++)
+	{
+		max = 1;
+		for (j = i-1; j >= 0; j--)
+			if (height[i] > height[j] && dp_pre[j] >= max)
+				max = dp_pre[j] + 1;
+		dp_pre[i] = max;
+	}
+
+	dp_post[n-1] = 1;
+	for (i = n-2; i >= 0; i--)
+	{
+		max = 1;
+		for (j = i+1; j < n; j++)
+			if (height[i] > height[j] && dp_post[j] >= max)
+				max = dp_post[j] + 1;
+		dp_post[i] = max;
+	}
+
+	max = 0;
+	int max_index = -1;
+	for (i = 0; i < n; i++)
+		if (dp_pre[i] + dp_post[i] >= max)
+		{
+			max = dp_pre[i] + dp_post[i];
+			max_index = i;
+		}
+	
+	for (i = 0; i < max_index; i++)
+		if (height[i] == height[max_index])
+			max++;
+
+	return (n - max + 1);
+}
+
+int main()
+{
+	int i;
+	scanf("%d", &n);
+	
+	for (i = 0; i < n; i++)
+		scanf("%f", &height[i]);
+
+	printf("%d", solve());
+	return 0;
+}

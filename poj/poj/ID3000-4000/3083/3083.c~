@@ -1,0 +1,119 @@
+/*
+ * poj 2488
+ * guzhoudiaoke@126.com
+ * 2011-09-08
+ */
+
+#include <stdio.h>
+
+int move[4][2] = {
+	{0, 1}, {1, 0}, {0, -1}, {-1, 0}
+};
+
+void find_start(char map[40][41], int *row, int *col, int *dir, int width, int height)
+{
+	int i;
+	for (i = 1; i < height-1; i++)
+	{
+		if (map[i][0] == 'S')
+		{
+			*row = i;
+			*col = 0;
+			*dir = 0;	// 向右
+			return;
+		}
+		else if (map[i][width-1] == 'S')
+		{
+			*row = i;
+			*col = width - 1;
+			*dir = 2;	// 向左
+			return;
+		}
+	}
+	for (i = 1; i < width-1; i++)
+	{
+		if (map[0][i] == 'S')
+		{
+			*row = 0;
+			*col = i;
+			*dir = 1;	// 向下
+			return;
+		}
+		if (map[height-1][i] == 'S')
+		{
+			*row = height - 1;
+			*col = i;
+			*dir = 3; 	// 向上
+			return;
+		}
+	}
+}
+
+int step;
+
+int left_dir(int dir)
+{
+	return (dir + 3) % 4;
+}
+
+int right_dir(int dir)
+{
+	return (dir + 1) % 4;
+}
+
+int back_dir(int dir)
+{
+	return (dir + 2) % 4;
+}
+
+int move_forward(int row, int col, int *new_row, int *new_col, int dir)
+{
+	*new_row = row + move[dir][0];
+	*new_col = col + move[dir][1];
+}
+
+int DFS(char map[40][41], int row, int col, int dir, int width, int height)
+{
+	if (map[row][col] == 'E')
+		return 1;
+	printf("dir = %d\n", dir);
+	int new_row, new_col, new_dir, i, out = 0;
+	new_dir = left_dir(dir);
+	printf("new_dir = %d\n", new_dir);
+	for (i = new_dir; i < new_dir+4; i++)
+	{
+		move_forward(row, col, &new_row, &new_col, i%4);
+		if (new_row >= 0 && new_row < height &&
+			new_col >= 0 && new_col < width &&
+			map[new_row][new_col] != '#')
+		{
+			printf("%d\n", i);
+			DFS(map, new_row, new_col, i%4, width, height);
+			step++;
+			break;
+		}
+	}
+	
+	return 0;
+}
+
+int main()
+{
+	char map[40][41];
+	int n, width, height, i, start_row, start_col, start_dir;
+	scanf("%d", &n);
+	while (n--) 
+	{
+		scanf("%d%d", &width, &height);
+		for (i = 0; i < height; i++)
+			scanf("%s", map[i]);
+	
+		find_start(map, &start_row, &start_col, &start_dir, width, height);
+		step = 1;
+		DFS(map, start_row, start_col, start_dir, width, height);
+		printf("%d", step);
+	}
+	
+	return 0;
+}
+

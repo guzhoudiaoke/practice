@@ -1,0 +1,30 @@
+/*
+ * poj 3259
+ * guzhoudiaoke@126.com
+ * 2011-09-16
+ */
+
+#include <stdio.h>
+#include <string.h>
+
+#define INF 	25000001
+#define LONGEST	10000
+
+int way[501][501];
+
+int main()
+{
+	int f, n, m, w, i;
+	scanf("%d", &f);
+
+	while (f--)
+	{
+		memset(way, 1, sizeof(way));
+		scanf("%d%d%d", &n, &m, &w);
+
+		for (i = 1; i <= n; i++)
+			printf("%d ", way[i][1]);
+	}
+
+	return 0;
+}

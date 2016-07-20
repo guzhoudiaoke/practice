@@ -1,0 +1,178 @@
+胡乱选的:
+poj1000 		ac
+poj1001 		ac
+poj1002	 		ac
+poj1003 		ac
+poj1004 		ac
+poj1005 		ac
+poj1006 		ac
+poj1007 		ac
+poj1016 		ac
+poj2661			ac
+poj1298 		ac
+poj1046 		ac
+poj1028 		ac
+poj1008			ac
+poj1061			ac
+
+3408			ac
+3213			ac
+3216			ac
+3598			ac
+
+POJ上的一些水题(可用来练手和增加自信):
+poj3299 		ac
+poj2159 		ac
+poj2739 		ac
+poj1083 		ac
+poj2262 		ac
+poj1503 		ac
+poj3006 		ac
+poj3094 		ac
+poj2109			ac
+poj1218 		ac
+
+1326 			ac
+1552 			ac
+1658 			ac
+1665 			ac
+2013 			ac
+2017 			ac
+2027 			ac
+2105 			ac
+2272 			ac
+2301 			ac
+2328 			ac
+2350			ac
+2388			ac
+2390			ac
+
+初期:
+一.基本算法:
+     (1)枚举
+     	poj1753 	ac
+     	poj2965 	ac
+     (2)贪心
+     	poj1328		ac
+     	poj2586		ac
+     (3)递归和分治法
+     	poj2255 	ac
+     (4)递推
+     (5)构造法
+     	poj3295		ac
+     (6)模拟法
+     	poj1068		ac
+     	poj2632		ac
+     	poj1573		ac
+     	poj2993		ac
+     	poj2996		ac
+二.图算法:
+     (1)图的深度优先遍历和广度优先遍历.
+     (2)最短路径算法(dijkstra,bellman-ford,floyd,heap+dijkstra)
+        poj1860		ac
+        poj3259		ac
+        poj1062		ac
+        poj2253		ac
+        poj1125		ac
+        poj2240		ac
+     (3)最小生成树算法(prim,kruskal)
+        poj1789		ac
+        poj2485		ac
+        poj1258		ac
+        poj3026		ac
+     (4)拓扑排序
+     	poj1094		ac
+     (5)二分图的最大匹配 (匈牙利算法) 
+     	poj3041		ac
+     	poj3020		ac
+     (6)最大流的增广路算法(KM算法)
+     	poj1459		
+     	poj3436		
+三.数据结构.
+     (1)串 
+     	poj1035		ac
+     	poj3080		ac
+     	poj1936		ac
+     (2)排序(快排、归并排(与逆序数有关)、堆排) 
+     	poj2388		ac
+     	poj2299		ac
+     (3)简单并查集的应用
+     (4)哈希表和二分查找等高效查找法(数的Hash,串的Hash)  
+        poj3349		ac
+        poj3274		ac
+        POJ2151		ac
+        poj1840		ac
+        poj2002		ac
+        poj2503		ac
+     (5)哈夫曼树
+     	poj3253		ac
+     (6)堆
+     (7)trie树(静态建树、动态建树) 
+     	poj2513		ac
+四.简单搜索
+     (1)深度优先搜索 
+     	poj2488		ac
+     	poj3083		ac
+     	poj3009		ac
+     	poj1321		ac
+     	poj2251		ac
+     (2)广度优先搜索
+     	poj3278		ac
+     	poj1426		ac
+     	poj3126		ac
+     	poj3087		ac
+     	poj3414		ac
+     (3)简单搜索技巧和剪枝
+     	poj2531		ac
+     	poj1416		ac
+     	poj2676		ac
+     	poj1129		ac
+五.动态规划
+     (1)背包问题. 
+     	poj1837		ac
+     	poj1276		ac
+     (2)型如下表的简单DP(可参考lrj的书 page149):
+       1.E[j]=opt{D+w(i,j)} 
+       	poj3267		ac
+       	poj1836		ac
+       	poj1260		ac
+       	poj2533		ac
+       2.E[i,j]=opt{D[i-1,j]+xi,D[i,j-1]+yj,D[i-1][j-1]+zij} (最长公共子序列)   
+        poj3176		ac
+        poj1080		ac
+        poj1159		ac
+       3.C[i,j]=w[i,j]+opt{C[i,k-1]+C[k,j]}.(最优二分检索树问题)
+六.数学
+     (1)组合数学:
+        1.加法原理和乘法原理.
+        2.排列组合.
+        3.递推关系.
+       	POJ3252		
+       	poj1850		
+       	poj1019		
+       	poj1942		
+     (2)数论.
+        1.素数与整除问题
+        2.进制位.
+        3.同余模运算.
+        poj2635		
+        poj3292		
+        poj1845		
+        poj2115		
+     (3)计算方法.
+        1.二分法求解单调函数相关知识
+        poj3273		
+        poj3258		
+        poj1905		
+        poj3122		
+七.计算几何学.
+     (1)几何公式.
+     (2)叉积和点积的运用(如线段相交的判定,点到线段的距离等). 
+     	poj2031		ac（prim，分类错了吧）
+     	poj1039		ac
+     (3)多边型的简单算法(求面积)和相关判定(点在多边型内,多边型是否相交)
+        poj1408		ac
+        poj1584		
+     (4)凸包
+     	poj2187		
+     	poj1113		

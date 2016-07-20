@@ -1,0 +1,110 @@
+/*
+ * poj 2236
+ * guzhoudiaoke@126.com
+ * 2011-11-13
+ */
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int n, d;
+typedef struct position {
+	int x;
+	int y;
+} position;
+
+bool 	 *root;
+bool 	 *work_well;
+int  	 *parent;
+position *pos;
+
+void init_set()
+{
+	root = new bool[n+1];
+	parent = new int[n+1];
+	memset(root, true, sizeof(bool)*(n+1));
+	memset(parent, 1, sizeof(int)*(n+1));
+}
+
+int find_set(int e)
+{
+	int i = e;
+	while (!root[i]) i = parent[i];
+	int j = e;
+	while (j != i) {
+		int pj = parent[j];
+		parent[j] = i;
+		j = pj;
+	}
+
+	return i;
+}
+
+bool union_set(int x, int y)
+{
+	int px = find_set(x);
+	int py = find_set(y);
+	if (px == py) return false;
+	if (parent[px] < parent[py]) {
+		parent[py] += parent[px];
+		root[px] = false;
+		parent[px] = py;
+	}
+	else {
+		parent[px] += parent[py];
+		root[py] = false;
+		parent[py] = px;
+	}
+
+	return true;
+}
+
+int distance(int p1, int p2)
+{
+	return ((pos[p1].x - pos[p2].x)*(pos[p1].x - pos[p2].x) + (pos[p1].y - pos[p2].y)*(pos[p1].y - pos[p2].y));
+}
+
+int main()
+{
+	char cmd;
+	int repair;
+	int test_from, test_to;
+
+	scanf("%d %d", &n, &d);
+	pos = new position[n+1];
+	work_well = new bool[n+1];
+	memset(work_well, false, sizeof(bool)*(n+1));
+
+	init_set();
+
+	for (int i = 1; i <= n; i++)
+		scanf("%d %d", &pos[i].x, &pos[i].y);
+	
+	while (scanf("%c", &cmd) != EOF)
+	{
+		if (cmd == 'O') {
+			scanf("%d", &repair);
+			printf("%d\n", repair);
+			getchar();
+			work_well[repair] = true;
+			for (int i = 1; i <= n; i++)
+			{
+				if (i != repair && distance(i, repair) <= d*d && work_well[i])
+					union_set(i, repair);
+			}
+		}
+		else if (cmd == 'S') {
+			scanf("%d %d", &test_from, &test_to);
+			printf("%d %d\n", test_from, test_to);
+			getchar();
+			if (find_set(test_from) == find_set(test_to))
+				printf("SUCCESS\n");
+			else
+				printf("FAIL\n");
+		}
+	}
+
+	return 0;
+}
+

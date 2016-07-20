@@ -1,0 +1,37 @@
+/*
+ * poj 3026
+ * guzhoudiaoke@126.com
+ * 2011-09-18
+ */
+
+#include <stdio.h>
+
+char maze[51][51];
+
+int main()
+{
+	int t, i, j, x, y;
+	char buf[51];
+	scanf("%d", &t);
+
+	while (t--)
+	{
+		scanf("%d%d", &x, &y);
+		getchar();
+		for (i = 0; i < y; i++)
+		{
+			gets(buf);
+			for (j = 0; j < x; j++)
+				maze[i][j] = buf[j];
+		}
+
+		for (i = 0; i < y; i++)
+		{
+			for (j = 0; j < x; j++)
+				printf("%c", maze[i][j]);
+			printf("\n");
+		}
+	}
+
+	return 0;
+}

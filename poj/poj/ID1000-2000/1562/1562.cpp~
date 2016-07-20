@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <string.h>
+
+char grid[101][101];
+bool visited[101][101];
+int m, n;
+const int move[8][2] = {
+	{-1, 0}, {-1, 1}, {0, 1}, {1, 1},
+	{1, 0}, {1, -1}, {0, -1}, {-1, -1},
+};
+
+bool out_map(int row, int col)
+{
+	if (row < 0 || col < 0 || row >= m || col >= n)
+		return true;
+	return false;
+}
+
+void dfs(int row, int col)
+{
+	visited[row][col] = true;
+	for (int i = 0; i < 8; i++)
+	{
+		int r = row + move[i][0];
+		int c = col + move[i][1];
+		if (!out_map(r, c) && grid[r][c] == '@' && !visited[r][c])
+			dfs(r, c);
+	}
+}
+
+int main()
+{
+	int i, j, ans;
+	while (1)
+	{
+		scanf("%d %d", &m, &n);
+		for (i = 0; i < m; i++)
+			scanf("%s", grid[i]);
+
+		ans = 0;
+		memset(visited, false, sizeof(visited));
+		for (i = 0; i < m; i++)
+			for (j = 0; j < n; j++)
+				if (grid[i][j] == '@' && !visited[i][j]) 
+				{
+					dfs(i, j);
+					ans++;
+				}
+
+		printf("%d\n", ans);
+	}
+
+	return 0;
+}
+

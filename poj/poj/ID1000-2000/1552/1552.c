@@ -1,0 +1,44 @@
+/*
+ * poj 1552
+ * guzhoudiaoke@126.com
+ * 2011-09-21
+ */
+
+#include <stdio.h>
+#include <string.h>
+
+int num[16], double_num[16];
+int n, result;
+
+int main()
+{
+	while (1)
+	{
+		n = 1; 
+		result = 0;
+
+		scanf("%d", &num[0]);
+		double_num[0] = 2*num[0];
+		if (num[0] == -1)
+			break;
+
+		while (1)
+		{
+			scanf("%d", &num[n]);
+			if (num[n] == 0)
+				break;
+			double_num[n] = num[n]*2;
+			n++;
+		}
+
+		int i, j;
+		for (i = 0; i < n; i++)
+			for (j = 0; j < n; j++)
+				if (double_num[i] == num[j])
+					result++;
+
+		printf("%d\n", result);
+	}
+
+	return 0;
+}

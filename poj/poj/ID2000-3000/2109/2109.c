@@ -1,0 +1,18 @@
+/*
+ * poj 2109
+ * guzhoudiaoke@126.com
+ * 2011-09-03
+ */
+
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+	double n, p;
+	while (scanf("%lf%lf",&n, &p) == 2)
+		printf("%.0lf\n", pow(p, 1/n));
+		
+	return 0;
+}
+

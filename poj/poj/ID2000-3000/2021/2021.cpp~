@@ -1,0 +1,99 @@
+#include <stdio.h>
+#include <iostream>
+#include <string>
+#include <stdlib.h>
+#include <string.h>
+#include <queue>
+
+using namespace std;
+
+string name_list[100];
+int map[100][100];
+int x, index;
+
+typedef struct person_age {
+	int id;
+	int depth;
+	int age;
+} person_age;
+
+person_age p[100];
+
+void solve(int t, int dep)
+{
+	for (int i = 0; i < index; i++)
+	{
+		if (map[t][i])
+		{
+			p[i].age = p[t].age - map[t][i];
+			p[i].id = i;
+			p[i].depth = dep;
+			solve(i, dep+1);
+		}
+	}
+}
+
+int cmp_p(const void *a, const void *b)
+{
+	person_age *pa = (person_age *)a;
+	person_age *pb = (person_age *)b;
+	
+	if (pa->depth != pb->depth)
+		return pa->depth - pb->depth;
+	if (pa->age != pb->age)
+		return pa->age - pb->age;
+	return strcmp(name_list[pa->id].c_str(), name_list[pb->id].c_str());
+}
+
+int main()
+{
+	int n, age, set_no, i, j, k;
+	string fname, cname;
+
+	cin >> n;
+	set_no = 1;
+	while (n--)
+	{
+		cin >> x;
+		index = 0;
+		memset(map, 0, sizeof(map));
+		for (i = 0; i < x; i++)
+		{
+			cin >> fname >> cname >> age;
+			for (j = 0; j < index; j++)
+				if (name_list[j] == fname)
+					break;
+			if (j == index) {
+				name_list[index] = fname;
+				index++;
+			}
+			for (k = 0; k < index; k++)
+				if (name_list[k] == cname)
+					break;
+			if (k == index) {
+				name_list[index] = cname;
+				index++;
+			}
+			map[j][k] = age;
+		}
+
+		for (i = 0; i < index; i++)
+			if (name_list[i] == "Ted")
+				break;
+
+		p[i].id = i;
+		p[i].age = 100;
+		p[i].dep = 0;
+
+		cout << "DATASET " << set_no << endl;
+		solve(i, 0);
+
+		qsort(p, index, sizeof(person_age), cmp_p);
+
+		set_no++;
+		for (i = 1; i < x; i++)
+			cout << name_list[p[i].id] << " " << p[i].age << endl;
+	}
+
+	return 0;
+}

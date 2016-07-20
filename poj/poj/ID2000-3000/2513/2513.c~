@@ -1,0 +1,81 @@
+/*
+ * poj 2513
+ * guzhoudiaoke@126.com
+ * 2011-09-07
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct tire_tree {
+	int index;		// 每种颜色的索引
+	struct tire_tree *next[27];
+}tire_tree;
+
+tire_tree *root;
+int color_degree[500001];	// 每种颜色看作一个节点，该数组表示节点的度
+int total_num = 0;
+
+void tire_create(tire_tree **node)
+{
+	(*node) = (tire_tree *)malloc(sizeof(tire_tree));
+	int i;
+	for (i = 0; i < 27; i++)
+		(*node)->next[i] = NULL;
+	(*node)->index = 0;
+}
+
+void tire_insert(char *color)
+{
+	tire_tree *p = root;
+	int len = strlen(color);
+	int i;
+	for (i = 0; i < len; i++)
+	{
+		int pos = color[i] - 'a';
+		if (p->next[pos] == NULL)
+			tire_create(&(p->next[pos]));
+		p = p->next[pos];
+	}
+	if (p->index == 0)
+		p->index = total_num++;
+}
+
+int tire_search(char *color)
+{
+	tire_tree *p = root;
+	int len = strlen(color);
+	int i;
+	for (i = 0; i < len; i++)
+		p = p->next[color[i]-'a'];
+	
+	return p->index;
+}
+
+int main()
+{
+	char color_l[11], color_r[11];
+	int i;
+	
+	tire_create(&root);
+	memset(color_degree, 0, sizeof(color_degree));
+
+	while (scanf("%s%s", color_l, color_r) != EOF)
+	{
+		tire_insert(color_l);
+		tire_insert(color_r);
+		int index_l = tire_search(color_l);
+		int index_r = tire_search(color_r);
+		printf("%d %d\n", index_l, index_r);
+		color_degree[index_l]++;
+		color_degree[index_r]++;
+	}
+	
+	printf("input finish!\n");
+	for (i = 0; i < total_num; i++)
+		if (color_degree[i])
+			printf("%d %d\n", i, color_degree[i]);
+
+	return 0;
+}

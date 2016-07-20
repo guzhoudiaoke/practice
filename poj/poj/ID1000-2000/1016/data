@@ -1,0 +1,54 @@
+Input
+A sequence of non-negative integers, each having at most 80 digits, followed by the terminating value -1. There are no extra leading zeros.
+
+Output
+For each non-negative input value n, output the appropriate choice from among the following messages (where n is the input value, j is a positive integer, and k is a positive integer greater than 1):
+n is self-inventorying
+n is self-inventorying after j steps
+n enters an inventory loop of length k
+n can not be classified after 15 iterations
+
+Sample Input
+
+22 
+31123314 
+314213241519 
+21221314 
+111222234459 
+-1
+
+Sample Output
+
+22 is self-inventorying 
+31123314 is self-inventorying 
+314213241519 enters an inventory loop of length 2 
+21221314 is self-inventorying after 2 steps 
+111222234459 enters an inventory loop of length 2 
+
+
+
+
+
+22 is self-inventorying
+31123314 is self-inventorying
+314213241519 enters an inventory loop of length 2
+21221314 is self-inventorying after 2 steps
+111222234459 enters an inventory loop of length 2
+123456789 is self-inventorying after 5 steps
+654641656 enters an inventory loop of length 2
+2101400052100005496 enters an inventory loop of length 2
+10000000002000000000 enters an inventory loop of length 3
+333 is self-inventorying after 11 steps
+1 is self-inventorying after 12 steps
+99999999999999999999999999999999999999999999999999999999999999999999999999999999 can not be classified after 15 iterations
+0000 enters an inventory loop of length 2
+0001 is self-inventorying after 8 steps
+0111 is self-inventorying after 8 steps
+1111 is self-inventorying after 8 steps
+123456789 is self-inventorying after 5 steps
+456137892 is self-inventorying after 5 steps
+123213241561 enters an inventory loop of length 2
+543265544536464364 enters an inventory loop of length 2
+5412314454766464364 is self-inventorying after 3 steps
+543267685643564364 enters an inventory loop of length 2
+5423434560121016464364 is self-inventorying after 3 steps

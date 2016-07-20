@@ -1,0 +1,128 @@
+#include <stdio.h>
+#include <string.h>
+#include <vector>
+
+using namespace std;
+
+#define INF	0x7ffffff
+#define MAX_N	10001
+
+typedef struct arc_node {
+	int id;
+	arc_node *next;
+} arc_node;
+
+arc_node *arcs[MAX_N];
+bool visited[MAX_N];
+int n, dp[MAX_N];
+vector<int> ans;
+
+void input()
+{
+
+	int i, a, b;
+	scanf("%d", &n);
+	
+	for (i = 1; i <= n; i++)
+	{
+		arcs[i] = new arc_node;
+		arcs[i]->next = NULL;
+	}
+
+	for (i = 1; i < n; i++)
+	{
+		scanf("%d %d", &a, &b);
+		arc_node *node;
+
+		node = new arc_node;
+		node->id = a;
+		node->next = arcs[b]->next;
+		arcs[b]->next = node;
+
+		node = new arc_node;
+		node->id = b;
+		node->next = arcs[a]->next;
+		arcs[a]->next = node;
+	}
+
+	for (i = 1; i <= n; i++)
+		dp[i] = INF;
+	memset(visited, false, sizeof(visited));
+}
+
+int dfs(int index)
+{
+	int num = 0, max = 0, sum = 0;
+	visited[index] = true;
+
+	arc_node *p = arcs[index]->next;
+	while (p)
+	{
+		if (!visited[p->id])
+		{
+			num = 1 + dfs(p->id);
+			if (num > max) max = num;
+			sum += num;
+		}
+
+		p = p->next;
+	}
+
+	dp[index] = max > (n-sum-1) ? max : (n-sum-1);
+
+	return sum;
+}
+
+void disp_ans()
+{
+	int i, min = INF;
+	for (i = 1; i <= n; i++)
+	{
+		if (dp[i] < min)
+		{
+			ans.clear();
+			ans.push_back(i);
+			min = dp[i];
+		}
+		else if (dp[i] == min)
+		{
+			ans.push_back(i);
+			min = dp[i];
+		}
+	}
+
+	vector<int>::iterator it = ans.begin();
+	while (it != ans.end())
+	{
+		printf("%d\n", *it);
+		it++;
+	}
+}
+
+void clear()
+{
+	int i;
+	for (i = 1; i <= n; i++)
+	{
+		arc_node *p = arcs[i];
+		arc_node *q = p->next;
+
+		while (p)
+		{
+			q = p->next;
+			delete p;
+			p = q;
+		}
+	}
+}
+
+int main()
+{
+	input();
+	dfs(1);
+	disp_ans();
+	clear();
+
+	return 0;
+}
+

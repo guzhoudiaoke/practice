@@ -1,0 +1,46 @@
+/*
+ * poj 1326
+ * guzhoudiaoke@126.com
+ * 2011-09-20
+ */
+
+#include <stdio.h>
+
+int main()
+{
+	int summary = 0;
+	float acmperk, miles;
+	char buf[100], ori_city[50], dist_city[50], type;
+
+	while (1)
+	{
+		gets(buf);
+		if (strcmp(buf, "#") == 0)
+			break;
+		else if (strcmp(buf, "0") == 0)
+		{
+			printf("%d\n", summary);
+			summary = 0;
+		}
+		sscanf(buf, "%s%s%f%c", ori_city, dist_city, &miles, &type);
+		switch (type)
+		{
+			case 'F':
+				summary += 2 * miles;
+				break;
+			case 'B':
+				summary += (int)(0.5 + miles*1.5);
+				break;
+			case 'Y':
+				if (miles <= 500)
+					summary += 500;
+				else
+					summary += miles;
+				break;
+			default:
+				break;
+		}
+	}
+
+	return 0;
+}

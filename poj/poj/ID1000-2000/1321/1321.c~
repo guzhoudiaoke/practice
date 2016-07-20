@@ -1,0 +1,70 @@
+/*
+ * poj 1321
+ * guzhoudiaoke@126.com
+ * 2011-09-10
+ */
+
+#include <stdio.h>
+
+char map[8][9];
+int visited[8][2];
+int n, k, c;
+
+int can_place(int row, int col)
+{
+	if (map[row][col] != '#')
+		return 0;
+	int i;
+	for (i = 0; i < n; i++)
+		if (visited[i][0] == row || visited[i][1] == col)
+			return 0;
+	return 1;
+}
+
+int DFS(int row, int placed)
+{
+	if (placed == k)
+	{
+		c++;
+		return;
+	}
+	if (row >= n)
+		return;
+	int i;
+	for (i = 0; i < n; i++)
+		if (can_place(row, i))
+		{
+			visited[placed][0] = row;
+			visited[placed][1] = i;
+			DFS(row+1, placed+1);
+			visited[placed][0] = -1;
+			visited[placed][1] = -1;
+		}
+	DFS(row+1, placed+1);
+}
+
+
+int main()
+{
+	int i, j;
+	while (1)
+	{
+		scanf("%d%d", &n, &k);
+		if (n == -1 && k == -1)
+			break;
+
+		for (i = 0; i < n; i++)
+			scanf("%s", map[i]);
+		
+		for (i = 0; i < n; i++)
+		{
+			visited[i][0] = -1;
+			visited[i][1] = -1;
+		}
+		c = 0;
+		DFS(0, 0);
+		printf("%d\n", c);
+	}
+
+	return 0;
+}

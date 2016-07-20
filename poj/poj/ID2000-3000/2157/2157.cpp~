@@ -1,0 +1,143 @@
+#include <iostream>
+#include <cstring>
+#include <queue>
+using namespace std;
+
+typedef struct position {
+	int row;
+	int col;
+} position;
+
+int m, n, total_key[5], get_key[5];
+char map[20][20];
+bool visited[20][20];
+position start_pos;
+
+const int move[4][2] = {
+	{-1, 0}, {0, 1}, {1, 0}, {0, -1}
+};
+
+bool out_map(int r, int c)
+{
+	if (r < 0 || c < 0 || r >= m || c >= n)
+		return true;
+	return false;
+}
+
+void bfs_get_key()
+{
+	queue<position> q;
+	position p, temp;
+	memset(visited, false, sizeof(visited));
+
+	q.push(start_pos);
+	visited[start_pos.row][start_pos.col] = true;
+
+	while (! q.empty())
+	{
+		p.row = q.front().row;
+		p.col = q.front().col;
+		q.pop();
+
+		for (int i = 0; i < 4; i++)
+		{
+			temp.row = p.row + move[i][0];
+			temp.col = p.col + move[i][1];
+			if (!out_map(temp.row, temp.col) && !visited[temp.row][temp.col])
+			{
+				if (map[temp.row][temp.col] == '.' || (
+					map[temp.row][temp.col] >= 'a' && map[temp.row][temp.col] <= 'e'))
+				{
+					visited[temp.row][temp.col] = true;
+					q.push(temp);
+					if (map[temp.row][temp.col] != '.')
+					{
+						get_key[map[temp.row][temp.col] - 'a']++;
+						map[temp.row][temp.col] = '.';
+					}
+				}
+			}
+		}
+	}
+}
+
+bool bfs_get_goal()
+{
+	queue<position> q;
+	position p, temp;
+	memset(visited, false, sizeof(visited));
+
+	q.push(start_pos);
+	visited[start_pos.row][start_pos.col] = true;
+
+	while (! q.empty())
+	{
+		p.row = q.front().row;
+		p.col = q.front().col;
+		q.pop();
+		for (int i = 0; i < 4; i++)
+		{
+			temp.row = p.row + move[i][0];
+			temp.col = p.col + move[i][1];
+			if (!out_map(temp.row, temp.col) && 
+				map[temp.row][temp.col] != 'X' && !visited[temp.row][temp.col])
+			{
+				if (map[temp.row][temp.col] >= 'A' && map[temp.row][temp.col] <= 'E' &&
+					get_key[map[temp.row][temp.col] - 'A'] != total_key[map[temp.row][temp.col]])
+					continue;
+				if (map[temp.row][temp.col] == 'G')
+					return true;
+				if (map[temp.row][temp.col] >= 'a' && map[temp.row][temp.col] <= 'e')
+				{
+					get_key[map[temp.row][temp.col]]++;
+					map[temp.row][temp.col] = '.';
+				}
+				q.push(temp);
+				visited[temp.row][temp.col] = true;
+			}
+		}
+	}
+
+	return false;
+}
+
+int main()
+{
+	int i, j;
+
+	while (1)
+	{
+		cin >> m >> n;
+		if (m == 0) break;
+		
+		for (i = 0; i < 5; i++)
+		{
+			total_key[i] = 0;
+			get_key[i] = 0;
+		}
+
+		for (i = 0; i < m; i++)
+		{
+			for (j = 0; j < n; j++)
+			{
+				cin >> map[i][j];
+				if (map[i][j] >= 'a' && map[i][j] <= 'e')
+					total_key[map[i][j]-'a']++;
+				else if (map[i][j] == 'S')
+				{
+					start_pos.row = i;
+					start_pos.col = j;
+				}
+			}
+			cout << endl;
+		}
+
+		bfs_get_key();
+		if (bfs_get_goal())
+			cout << "YES" << endl;
+		else
+			cout << "NO" << endl;
+	}
+
+	return 0;
+}
