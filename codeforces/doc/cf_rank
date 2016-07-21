@@ -43,7 +43,7 @@ id      problem     language        rank    date
 42      208A        py,go
 43      144A        py,go           26911   16-7-18
 44      469A        py                      16-7-19
-45      344A        go                                  a lot data, fmt.Scan TLE, bufio.NewScanner work, pre scanf("%d\n", &n)
+45      344A        go                                  fmt.Scan TLE, bufio.NewScanner work, pre scanf("%d\n", &n)
 46      268A        py
 47      500A        go
 48      318A        py
@@ -80,25 +80,25 @@ id      problem     language        rank    date
 79      577A        go
 80      567A        py
 81      519A        go              16339   16-7-20
-82      579A        py
+82      579A        py                      16-7-21
 83      432A        go
 84      556A        py
 85      570A        go
-86      519B        py
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
+86      519B        py                                  xor to find x in a not in b
+87      427A        go
+88      459A        py
+89      327A        go
+90      467B        py
+91      515A        go
+92      200B        py
+93      270A        go
+94      583A        py                                  print(" ".join(str(i) for i in result))
+95      439A        go
+96      514A        py
+97      237A        go
+98      149A        py
+99      471A        go
+100     551A        py              13359   16-7-21     print(' '.join(map(str, nums)))
 101
 102
 103
