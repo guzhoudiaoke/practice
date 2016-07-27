@@ -138,9 +138,9 @@ id      problem     language        rank    date
 137     230B        go              9633    16-7-26
 138     519C        py
 139     535A        go
-140
-141
-142
+140     151A        py
+141     450A        go
+142     545A        py
 143
 144
 145
